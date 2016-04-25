@@ -2,32 +2,24 @@
 
 var express = require('express');
 var routes = require('./app/routes/index.js');
-var mongoose = require('mongoose');
-var passport = require('passport');
-var session = require('express-session');
+var mongo = require("mongodb").MongoClient;
+var mongoURI = process.env.Mongo_URI || 'mongodb://localhost:27017/imagesearch';
+
 
 var app = express();
-require('dotenv').load();
-require('./app/config/passport')(passport);
 
-mongoose.connect(process.env.MONGO_URI);
-
-app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
 app.use('/public', express.static(process.cwd() + '/public'));
-app.use('/common', express.static(process.cwd() + '/app/common'));
 
-app.use(session({
-	secret: 'secretClementine',
-	resave: false,
-	saveUninitialized: true
-}));
+mongo.connect(mongoURI, function(err, db) {
+	if (err) {throw new Error('Database failed to connect!');}
 
-app.use(passport.initialize());
-app.use(passport.session());
+	db = db.collection("recentQueries");
+	
+	routes(app, db);
 
-routes(app, passport);
-
-var port = process.env.PORT || 8080;
-app.listen(port,  function () {
-	console.log('Node.js listening on port ' + port + '...');
+	var port = process.env.PORT;
+	app.listen(port,  function () {
+		console.log('server.js listening on port ' + port + '...');	
+	
+	});
 });
