@@ -3,17 +3,27 @@
   "version": "0.0.0",
   "description": "A simple image search abstraction layer using imgur API",
   "main": "server.js",
-  "repository": {
-    "type": "git",
-    "url": ""
+  "dependencies": {
+    "express": "^4.13.4",
+    "mongodb": "^2.1.16"
   },
+  "devDependencies": {},
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrendanSweeny/image-abstraction-layer.git"
+  },
+  "keywords": [
+    "imgur",
+    "api"
+  ],
   "author": "Brendan Sweeny",
   "license": "MIT",
-  "dependencies": {
-    "express": "^4.12.4",
-    "mongodb": "^2.1.16",
-  }
+  "bugs": {
+    "url": "https://github.com/BrendanSweeny/image-abstraction-layer/issues"
+  },
+  "homepage": "https://github.com/BrendanSweeny/image-abstraction-layer#readme"
 }
