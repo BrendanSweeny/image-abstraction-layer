@@ -1,15 +1,15 @@
-# Image Abstraction Layer Using Imgur API
+# Image Search Abstraction Layer Using Imgur API
 
 Built with Node.js, Express, and MongoDB
 
 ## Overview
 
-The image abstraction layer uses the imgur API to return a variable array of objects containing image title, topic, alt text, and URL. Alternatively, the API can return the ten most recent search queries.
+The image search abstraction layer uses the imgur API to return a variable array of objects containing image title, topic, alt text, and URL. Alternatively, the API can return the ten most recent search queries.
 
 ## Usage
 
 - Return a list of image objects with a GET request to: "/api/imagesearch/<Search Term>"
-- Paginate results with a GET request to: "/api/imagesearch/<Search Term>?offset=<Number>"
+- Limit the number of results with a GET request to: "/api/imagesearch/<Search Term>?offset=<Number>"
 - Return list of ten recent searches with a GET request to: "/api/latest/imagesearch"
 
 ## Examples
@@ -51,4 +51,4 @@ GET => "/api/latest/imagesearch/" :
 
 ## Notes
 
-- Search queries expire after seven days
+- Recent search queries are stored as documents in MongoDB and expire after seven days using MongoDB TTL

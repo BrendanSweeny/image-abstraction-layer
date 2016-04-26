@@ -6,10 +6,63 @@
 		<title>image-abstraction-layer</title>
 		
 		<link href="/public/css/main.css" rel="stylesheet" type="text/css">
+		<link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+		
+		<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 	</head>
 	
 	<body>
-		<p>Hello World!</p>
+		<div class="container">
+			<h1 class="title">Image Search Abstraction Layer Using Imgur API</h1>
+			<p class="title">Built with Node.js, Express, and MongoDB</p>
+			<p>The image search abstraction layer uses the imgur API to return a variable array of objects containing image title, topic, alt text, and URL. Alternatively, the API can return the ten most recent search queries.</p>
+			
+			<h2>Usage</h2>
+			<ul>
+				<li>Return a list of image objects with a GET request to: <code>"/api/imagesearch/&#60;Search Term&#62;"</code></li>
+				<li>Limit the number of results with a GET request to: <code>"/api/imagesearch/&#60;Search Term&#62;?offset=&#60;Number&#62;"</code></li>
+				<li>Return list of ten recent searches with a GET request to: <code>"/api/latest/imagesearch"</code></li>
+			</ul>
+			
+			<h2>Examples</h2>
+			<code>GET => "/api/imagesearch/cats?offset=2" :</code>
+			<pre class="prettyprint">
+	[
+		{
+			title: "Everyone deserves to see cats in ties today",
+			topic: "Aww",
+			description: null,
+			url: "http://imgur.com/a/KaYI1"
+		},
+		{
+			title: "Scotch & Cats",
+			topic: "No Topic",
+			description: null,
+			url: "http://imgur.com/a/37oSL"
+		}
+	]
+			</pre>
+			
+			<code>GET => "/api/latest/imagesearch/" :</code>
+			<pre class="prettyprint">
+	[
+		{
+			term: "cats",
+			date: "2016-04-25T02:10:24.813Z"
+		},
+		{
+			term: "ninjas",
+			date: "2016-04-25T02:03:42.404Z"
+		},
+		
+		...
+	]
+			</pre>
+			
+			<h2>Notes</h2>
+			<ul>
+				<li>Recent search queries are stored as documents in MongoDB and expire after seven days using MongoDB TTL</li>
+			</ul>
+		</div>
 	</body>
-
 </html>
