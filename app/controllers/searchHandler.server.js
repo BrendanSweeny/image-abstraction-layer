@@ -32,7 +32,6 @@ function SearchHandler(db) {
         //Options for Imgur API call
 		var imgurOptions = {
 			host: 'api.imgur.com',
-			//For future random path: '/3/gallery/random/random/',
 			path: '/3/gallery/search/?q=' + encodeURIComponent(searchTerm),
 			method: 'GET',
 			
@@ -67,7 +66,6 @@ function SearchHandler(db) {
 				console.log('No more data to receive...');
 				
 				res.send(formatOutputJSON(req, data));
-				//res.send(JSON.parse(data));
 				
 				//Add search query to 'db.recentQueries' collection after
 				//sending data
